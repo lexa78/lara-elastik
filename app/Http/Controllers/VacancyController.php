@@ -16,7 +16,6 @@ class VacancyController extends Controller
      */
     public function index()
     {
-        //$this->addToIndex();
         $vacancies = DB::table('vacancies')->latest()->paginate(self::ITEMS_PER_PAGE);
         return view('vacancies.index', compact('vacancies'));
     }
@@ -32,12 +31,6 @@ class VacancyController extends Controller
     }
 
 
-//    private function addToIndex()
-//    {
-//        Vacancy::createIndex($shards = null, $replicas = null);
-//        Vacancy::putMapping($ignoreConflicts = true);
-//        Vacancy::addAllToIndex();
-//    }
     /**
      * Store a newly created resource in storage.
      *
@@ -50,8 +43,6 @@ class VacancyController extends Controller
             'title'=>'required|max:100',
             'description'=> 'required'
         ]);
-        //Vacancy::create($request->all());
-        //$this->addToIndex();
         $vacancy = new Vacancy([
             'title' => $request->get('title'),
             'description'=> $request->get('description')
@@ -102,8 +93,6 @@ class VacancyController extends Controller
         ]);
 
         $vacancy = Vacancy::find($id);
-        //$vacancy->update($request->all());
-//        $this->addToIndex();
         $vacancy->title = $request->get('title');
         $vacancy->description = $request->get('description');
         $vacancy->save();
